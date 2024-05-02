@@ -59,6 +59,23 @@ const showWinner = (winner) => {
   disableBoxes();
 };
 
+const showDraw = () => {
+  msg.innerText = `Game is Draw`;
+  msgContainer.classList.remove("hide");
+  disableBoxes();
+}
+
+const checkDraw = () => {
+  let i = 0;
+  for (box of boxes) {
+    if (box.disabled == true){ 
+      i++
+    } 
+  }
+  if (i === 9) {
+    showDraw();
+  }
+}
 const checkWinner = () => {
   for (pattern of winPatterns) {
     let pos1Value = boxes[pattern[0]].innerText;
@@ -69,6 +86,9 @@ const checkWinner = () => {
       if (pos1Value === pos2Value && pos2Value === pos3Value) {
         console.log("winner");
         showWinner(pos1Value);
+      }
+      else {
+        checkDraw();
       }
     }
   }
